@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<p th:text="'hello ' + ${name}">hello! empty</p>
+</body>
+</html>
+<!--
+    < p th:text="'hello ' + ${name}">
+    이거 동작안하면 기본으로 보여지는게 hello! empty
+    Spring MVC의 모델에 추가된 속성을 참조함.
+    HelloController 에서
+    model.addAttribute("name", name);
+    name 속성이 추가가 되면 이 값을 사용하여 텍스트를 동적으로 생성함
+
+-->

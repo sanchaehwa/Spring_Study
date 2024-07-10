@@ -1,0 +1,33 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.1'
+	id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'hello'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'// Template
+	implementation 'org.springframework.boot:spring-boot-starter-web' //web
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' //test library
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+//Grade : 의존 관계 관리 (Client : 사용자가 필요한게 Starter-web를 이용해야한다(의존1) : 다른 객체를 생성하거나 다른 객체의 매소드를 호출함으로써 하나의 객체가 다른 객체가 필요하다는 점을 충족 : 의존 관계
+//그럼 Starter-web이 필요한 라이브러리를 가지고와야함. 이러한 의존관계를 모두 해결(충족 library 를 가지고 오는등 이렇게) 이걸 Grade가 해주고 있는거
+//Spring -boot - starter : 스프링 부트 + 스프링 코어 + loging (SLF4J Logback)
+
