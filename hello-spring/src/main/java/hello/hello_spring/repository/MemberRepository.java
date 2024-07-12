@@ -16,7 +16,8 @@ public interface MemberRepository {
     Member save(Member member); //반환 타입 : member / member 객체 저장
     Optional<Member> findById(Long id);// 주어진 회원 ID로 회원 검색
     Optional<Member> findByName(String name); //주어진 이름으로 회원 검색
+    List<Member> findAll();
     /*Optional 이 회원 ID로 회원 검색을 해봤을때 또는 이름으로 검색해봤을때 이름이 없다면 null 반환할 수 있지만
     * 여기선 Optional.empty() 로 반환함 이에 Null을 다루지 않도록 함 */
-    List<Member> findAll(); //저장된 모든 회원 목록을 반환 변환 타입은 List<Member>
+    //저장된 모든 회원 목록을 반환 변환 타입은 List<Member>
 }

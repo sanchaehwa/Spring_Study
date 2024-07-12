@@ -1,7 +1,9 @@
 package hello.hello_spring.repository;
 //현재 회원을 저장하는 역할  => MemberRepository가 하고 있음. 하지만 현재 회원을 저장하는 역할을 메모리 또는 JDBC로 한다
+
 import hello.hello_spring.domain.Member;
 import org.springframework.jdbc.datasource.DataSourceUtils;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class JdbcMemberRepository  implements MemberRepository {
         ResultSet rs = null;
         try {
             conn = getConnection();
+            System.out.println("connected");
             pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, member.getName());
             pstmt.executeUpdate();

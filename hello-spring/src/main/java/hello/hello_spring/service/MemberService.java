@@ -6,10 +6,12 @@ package hello.hello_spring.service;
 
 import hello.hello_spring.domain.Member;
 import hello.hello_spring.repository.MemberRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 //@Service
 public class MemberService {
 
@@ -25,7 +27,7 @@ public class MemberService {
      * 비즈니스 로직중 같은 이름이 있는 회원 정보는 없어야 함
      */
     public Long join(Member member) {
-         /*Optional<Member> result = memberRepository.findByName(member.getName());
+         /*Optional<M ember> result = memberRepository.findByName(member.getName());
         Optional : Optional 안에 맴버 객체가 있음
         Optional를 바로 반환하는게 안좋음.
         반환 한다는게, 내부 값을 직접 꺼내서 사용하거나, 빈 값 (null)을 처리하는 로직을 호출하는 코드 쪽에서 작성해야 하니
