@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 @Transactional
@@ -36,10 +37,10 @@ class MemberServiceIntegrationTest {
 */
     @Test
     // 회원 가입 part
-    void  join() {
+    public void  join() throws Exception {
         //given (테스트의 초기 상태를 설정 / 객체 생성 , 동작할때 필요한 초기 설정)
         Member member = new Member();
-         member.setName("hello");
+        member.setName("hello");
          //Member 객체 생성
         //setName (member 객체 -> name 필드 -> "hello" 값 주입)
         //when (테스트 동작 수행하는 단계 / 매서드 호출 , 특정 액션 수행)
@@ -49,13 +50,13 @@ class MemberServiceIntegrationTest {
 
         //then (기대 결과 검증 / when 단계에서 수행한 동작의 결과가 예상대로 수행되었는지 확인하는)
 
-        Member findMember = memberService.findOne(saveId).get();
-        assertThat(member.getName()).isEqualTo(findMember.getName());
+        Member findMember = memberRepository.findById(saveId).get();
+        assertEquals(member.getName(), findMember.getName());
     }
 
     @Test
     //중복 회원 (예외)part
-    void findMembers() {
+    void findMembers() throws Exception {
         //given
         Member member1 = new Member();
         member1.setName("spring");

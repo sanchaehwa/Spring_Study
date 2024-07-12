@@ -33,10 +33,23 @@ public class MemberService {
         반환 한다는게, 내부 값을 직접 꺼내서 사용하거나, 빈 값 (null)을 처리하는 로직을 호출하는 코드 쪽에서 작성해야 하니
         매소드 내부에서 처리하는 방식
         * */
-        validateDuplicateMember(member); //중복 회원 검사
-        memberRepository.save(member); // 회원 저장
-        return member.getId(); //return (반환) : ID 값으로 조회 수정 식별 테스트 검증
+        //AOP 적용 구간
+//        long start = System.currentTimeMillis();
+//
+//        try {
+//            validateDuplicateMember(member); //중복 회원 검사
+//            memberRepository.save(member); // 회원 저장
+//            return member.getId(); //return (반환) : ID 값으로 조회 수정 식별 테스트 검증
+//        } finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMs = finish - start;
+//            System.out.println("join = " + timeMs + " ms");
+//        }
+            validateDuplicateMember(member);
+            memberRepository.save(member);
+            return member.getId();
     }
+
 
     private void validateDuplicateMember(Member member) {
         memberRepository.findByName(member.getName())
@@ -49,7 +62,16 @@ public class MemberService {
      * 전체 회원 조회
      */
     public List<Member> findMembers() {
-        return memberRepository.findAll();
+//        long start = System.currentTimeMillis();
+//        try {
+//            return memberRepository.findAll();
+//        }finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMs = finish - start;
+//            System.out.println("findMembers = " + timeMs + " ms");
+//        }
+
+         return memberRepository.findAll();
     }
 
     public Optional<Member> findOne(Long memberId) {
